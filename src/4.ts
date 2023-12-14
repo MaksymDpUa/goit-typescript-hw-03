@@ -15,10 +15,8 @@ interface IHouse {
 
 
 class Key implements IKey {
-  private signature: number;
-  constructor() {
-    this.signature = Math.random();
-    }    
+  private signature: number = Math.random();
+    
   getSignature(): number {
     return this.signature;
   }
@@ -26,10 +24,8 @@ class Key implements IKey {
 
 
 class Person implements IPerson {
-  private key: Key;
-  constructor(key: Key) {
-    this.key = key;
-    }    
+  constructor(private key: Key) { }  
+    
   getKey(): Key {
     return this.key;
   }
@@ -38,12 +34,10 @@ class Person implements IPerson {
 
 abstract class House implements IHouse {
   protected door: boolean = false;
-  protected key: Key;
   protected tenants: Person[] = [];
     
-  constructor(key: Key) {
-    this.key = key;
-  }
+  constructor(protected key: Key) { }
+    
   abstract openDoor(key: Key): void;
   comeIn(person: Person): void {
     if (this.door) {
